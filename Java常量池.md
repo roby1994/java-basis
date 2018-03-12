@@ -98,10 +98,11 @@ String的`intern()`方法会查找在常量池中是否存在一份equal相等�
 public class Test { 
 	public static void main(String[] args) { 
 		String hello = "Hello", lo = "lo"; 
-		System.out.println((hello == "Hello") + " "); 
-		System.out.println((Other.hello == hello) + " "); 
-		System.out.println((other.Other.hello == hello) + " "); System.out.println((hello == ("Hel"+"lo")) + " "); 
-		System.out.println((hello == ("Hel"+lo)) + " "); 
+		System.out.println((hello == "Hello") + " ");
+		System.out.println((Other.hello == hello) + " ");
+		System.out.println((other.Other.hello == hello) + " "); 
+		System.out.println((hello == ("Hel"+"lo")) + " ");
+		System.out.println((hello == ("Hel"+lo)) + " ");
 		System.out.println(hello == ("Hel"+lo).intern()); 
 	} 
 }
