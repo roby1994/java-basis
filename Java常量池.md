@@ -50,32 +50,32 @@
 
 3. 来个复杂的
 
-```java
-Integer a1 = 100;
-Integer a2 = 100;
-Integer a3 = 0;
-Integer a4 = new Integer(100);
-Integer a5 = new Integer(100);
-Integer a6 = new Integer(0);
-
-System.out.println(a1==a2);// true
-System.out.println(a1==a2+a3);// true
-System.out.println(a1==a4);// false
-System.out.println(a4==a5);// false
-System.out.println(a4==a5+a6);// true
-System.out.println(40==a5+a6);// true
-```
+	```java
+	Integer a1 = 100;
+	Integer a2 = 100;
+	Integer a3 = 0;
+	Integer a4 = new Integer(100);
+	Integer a5 = new Integer(100);
+	Integer a6 = new Integer(0);
+	
+	System.out.println(a1==a2);// true
+	System.out.println(a1==a2+a3);// true
+	System.out.println(a1==a4);// false
+	System.out.println(a4==a5);// false
+	System.out.println(a4==a5+a6);// true
+	System.out.println(40==a5+a6);// true
+	```
 上面的算数运算符`+`与逻辑运算符`==`利用了java自动拆箱的特性，所以`a4`与`a5+a6`计算与比较时，都自动拆箱了，最后都是int基本类型在计算与比较。
 
 #### String类和常量池
 * String类创建方式
 
-```java
-String name1 = "zhangsan";
-String name2 = new String("zhangsan");
-
-System.out.println(name1a4==name2);// false
-```
+	```java
+	String name1 = "zhangsan";
+	String name2 = new String("zhangsan");
+	
+	System.out.println(name1a4==name2);// false
+	```
 `name1`指向的对象是从*常量池*中拿的，`name2`指向的对象是直接在堆内存空间中创建的一个新对象。***只要用new关键字创建的对象都是新的对象。***
 
 * 连接表达式 +
@@ -93,26 +93,26 @@ String的`intern()`方法会查找在常量池中是否存在一份equal相等�
 
 * 字符串比较更丰富的一个例子
 
-```java
-//链接：https://www.jianshu.com/p/c7f47de2ee80
-public class Test { 
-	public static void main(String[] args) { 
-		String hello = "Hello", lo = "lo"; 
-		System.out.println((hello == "Hello") + " ");
-		System.out.println((Other.hello == hello) + " ");
-		System.out.println((other.Other.hello == hello) + " "); 
-		System.out.println((hello == ("Hel"+"lo")) + " ");
-		System.out.println((hello == ("Hel"+lo)) + " ");
-		System.out.println(hello == ("Hel"+lo).intern()); 
-	} 
-}
-
-class Other { 
-	static String hello = "Hello"; 
-}
-
-package other;
-public class Other { 
-	public static String hello = "Hello"; 
-}
-```
+	```java
+	//链接：https://www.jianshu.com/p/c7f47de2ee80
+	public class Test { 
+		public static void main(String[] args) { 
+			String hello = "Hello", lo = "lo"; 
+			System.out.println((hello == "Hello") + " ");
+			System.out.println((Other.hello == hello) + " ");
+			System.out.println((other.Other.hello == hello) + " "); 
+			System.out.println((hello == ("Hel"+"lo")) + " ");
+			System.out.println((hello == ("Hel"+lo)) + " ");
+			System.out.println(hello == ("Hel"+lo).intern()); 
+		} 
+	}
+	
+	class Other { 
+		static String hello = "Hello"; 
+	}
+	
+	package other;
+	public class Other { 
+		public static String hello = "Hello"; 
+	}
+	```
