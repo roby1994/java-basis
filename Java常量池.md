@@ -68,7 +68,7 @@ System.out.println(40==a5+a6);// true
 上面的算数运算符`+`与逻辑运算符`==`利用了java自动拆箱的特性，所以`a4`与`a5+a6`计算与比较时，都自动拆箱了，最后都是int基本类型在计算与比较。
 
 #### String类和常量池
-1. String类创建方式
+* String类创建方式
 
 ```java
 String name1 = "zhangsan";
@@ -76,6 +76,42 @@ String name2 = new String("zhangsan");
 
 System.out.println(name1a4==name2);// false
 ```
-`name1`指向的对象是从*常量池*中拿的，`name2`指向的对象是直接在堆内存空间中创建的一个新对象。
+`name1`指向的对象是从*常量池*中拿的，`name2`指向的对象是直接在堆内存空间中创建的一个新对象。***只要用new关键字创建的对象都是新的对象。***
 
-**只要用new关键字创建的对象都是新的对象。**
+* 连接表达式 +
+只有使用引号包含文本的方式创建的String对象之间使用连接运算符`+`产生的新对象，才会被加入字符串*常量池*。需要注意的是，如果用new关键字创建的String对象引用通过`+`连接而产生的新字符串对象，不会被加入字符串*常量池*。
+
+	* 公式： 既定常量 + 既定常量 = 常量池中驻留对象 
+
+* `String s1 = new String("xyz");`**创建了几个对象？** 
+两个对象：
+（1）类加载对一个类只会进行一次"xyz"创建,并驻留在*常量池*中；
+（2）运行期间，从*常量池*中把"xyz"复制到堆内存上，并且把堆内存上的对象引用用指向栈内存上的s1变量。
+
+* java.lang.String.intern()
+String的`intern()`方法会查找在常量池中是否存在一份equal相等的字符串,如果有则返回该字符串的引用,如果没有则添加自己的字符串进入常量池。
+
+* 字符串比较更丰富的一个例子
+
+```java
+//链接：https://www.jianshu.com/p/c7f47de2ee80
+public class Test { 
+	public static void main(String[] args) { 
+		String hello = "Hello", lo = "lo"; 
+		System.out.println((hello == "Hello") + " "); 
+		System.out.println((Other.hello == hello) + " "); 
+		System.out.println((other.Other.hello == hello) + " "); System.out.println((hello == ("Hel"+"lo")) + " "); 
+		System.out.println((hello == ("Hel"+lo)) + " "); 
+		System.out.println(hello == ("Hel"+lo).intern()); 
+	} 
+}
+
+class Other { 
+	static String hello = "Hello"; 
+}
+
+package other;
+public class Other { 
+	public static String hello = "Hello"; 
+}
+```
